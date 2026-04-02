@@ -45,4 +45,60 @@
 
         /* CONTACT FORM */
         .contact { padding: 80px 0; border-top: 1px solid #111; }
-        input, textarea { width: 100%; padding: 20px; background: #0a0a0a; border: 1px solid #222; color: white; border-radius: 12px; margin-bottom: 15px; font-family: inherit;
+        input, textarea { width: 100%; padding: 20px; background: #0a0a0a; border: 1px solid #222; color: white; border-radius: 12px; margin-bottom: 15px; font-family: inherit; }
+        .main-btn { width: 100%; background: linear-gradient(45deg, var(--blue), var(--pink)); color: white; padding: 20px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-content">
+            <div class="logo">OMNI<span>BUILD</span></div>
+            <div style="color: #27c93f; font-size: 0.8rem;">● ACCEPTING PROJECTS</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h1>We Build Websites<br>& AI Systems.</h1>
+            <p style="color: #666; max-width: 600px;">From high-speed websites to smart Python bots. We build the tech for your business.</p>
+            
+            <div class="button-row">
+                <button class="click-btn" onclick="document.getElementById('msg').value='I need a new Website for my business. Please send price.'">🌐 Build Website</button>
+                <button class="click-btn" onclick="document.getElementById('msg').value='I need an Instagram Bot to grow my brand.'">🤖 Build AI Bot</button>
+                <button class="click-btn" onclick="document.getElementById('msg').value='I need a Scraper to find customers. How much?'">🔍 Find Leads</button>
+            </div>
+        </section>
+
+        <section class="grid">
+            <div class="card">
+                <h3>Premium Websites</h3>
+                <p>We build fast, modern websites that work on mobile and PC. SEO optimized to find you more customers.</p>
+            </div>
+            <div class="card">
+                <h3>AI & Automation</h3>
+                <p>Smart Python scripts that handle your DMs, emails, and data 24/7 with zero mistakes.</p>
+            </div>
+            <div class="card">
+                <h3>Lead Generation</h3>
+                <p>Get thousands of emails and phone numbers from Google Maps and Instagram automatically.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h2 style="margin-bottom: 10px; text-align: center;">Start Your Project</h2>
+                <p style="text-align: center; color: #555; margin-bottom: 30px;">Contact us for more information or a price quote.</p>
+                <form action="https://formspree.io/f/YOUR_ID" method="POST">
+                    <input type="text" name="name" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Business Email" required>
+                    <textarea id="msg" name="message" placeholder="How can we help? (Click buttons above to auto-fill)" rows="5" required></textarea>
+                    <button type="submit" class="main-btn">GET A PRICE QUOTE →</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
