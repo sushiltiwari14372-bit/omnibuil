@@ -3,121 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBUILD | AI & Automation Architects</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>OMNIBUILD | AI & BOTS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #020202;
-            --primary: #007bff;
-            --primary-glow: rgba(0, 123, 255, 0.4);
-            --terminal-green: #00ff41;
-            --border: rgba(255, 255, 255, 0.05);
+            --bg: #030303;
+            --neon-pink: #ff00ff;
+            --neon-blue: #00d4ff;
+            --neon-purple: #9d00ff;
+            --card-bg: #0f0f0f;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background: var(--bg); color: #fff; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* Scanning Line Animation */
-        .scanline {
-            width: 100%; height: 2px; background: rgba(0, 123, 255, 0.1);
-            position: fixed; top: 0; z-index: 10;
-            animation: scan 4s linear infinite;
-        }
-        @keyframes scan { from { top: 0; } to { top: 100%; } }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-
-        /* Hero: The Brain of the Site */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { font-size: clamp(3rem, 10vw, 7rem); line-height: 0.9; margin-bottom: 20px; }
-        .hero span { color: var(--primary); font-weight: 800; }
-
-        /* AI Service Grid */
-        .ai-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; padding: 100px 0; }
-        
-        .ai-card {
-            background: rgba(10, 10, 10, 0.6); border: 1px solid var(--border);
-            padding: 50px; border-radius: 24px; position: relative; overflow: hidden;
-            transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        .ai-card:hover { border-color: var(--primary); transform: scale(1.02); background: #080808; }
-        
-        .bot-tag { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--primary); margin-bottom: 15px; display: block; }
-        
-        /* The "Code Snippet" styling for the cards */
-        .code-box {
-            font-family: 'JetBrains Mono', monospace; background: #000;
-            padding: 15px; border-radius: 10px; font-size: 0.8rem;
-            color: var(--terminal-green); border: 1px solid #111; margin-top: 20px;
+        /* Colorful Gradient Background */
+        .glow-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(0, 212, 255, 0.15) 0%, transparent 40%);
+            z-index: -1;
         }
 
-        .btn-action {
-            background: var(--primary); color: white; padding: 20px 50px;
-            text-decoration: none; font-weight: bold; display: inline-block;
-            border-radius: 4px; box-shadow: 0 0 30px var(--primary-glow);
-            transition: 0.3s; margin-top: 30px;
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        /* Cool Gradient Header */
+        .hero { padding: 120px 0; text-align: center; }
+        .hero h1 { 
+            font-size: clamp(3rem, 8vw, 5rem); font-weight: 900; line-height: 1; margin-bottom: 25px;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .btn-action:hover { letter-spacing: 2px; background: #fff; color: #000; }
+        .hero p { color: #aaa; font-size: 1.2rem; margin-bottom: 40px; }
+
+        /* Colorful Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .card { 
+            background: var(--card-bg); padding: 40px; border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
+            position: relative; overflow: hidden;
+        }
+        .card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 30px rgba(157, 0, 255, 0.2);
+        }
+        .card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--neon-blue); }
+
+        /* The Bot Code Lines */
+        .code-line { font-family: 'JetBrains Mono'; color: var(--neon-pink); font-size: 0.9rem; margin-bottom: 10px; opacity: 0.8; }
+
+        /* Big Neon Button */
+        .btn { 
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            color: white; padding: 18px 45px; border-radius: 50px; font-weight: bold;
+            text-decoration: none; display: inline-block; transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(157, 0, 255, 0.6); }
+
+        /* Simple Form */
+        .contact { padding: 100px 0; text-align: center; }
+        input, textarea { 
+            width: 100%; max-width: 600px; padding: 15px; margin-bottom: 15px; 
+            background: #111; border: 1px solid #333; color: white; border-radius: 10px; 
+        }
+        input:focus { border-color: var(--neon-blue); outline: none; }
 
     </style>
 </head>
 <body>
-    <div class="scanline"></div>
-    
-    <main class="container">
-        <section class="hero">
-            <p style="font-family: 'JetBrains Mono'; color: var(--primary);">[ INITIALIZING OMNIBUILD_INTELLIGENCE ]</p>
-            <h1>WE BUILD<br><span>THE BOTS</span><br>THAT BUILD<br>BUSINESS.</h1>
-            <p style="color: #666; max-width: 500px; font-size: 1.2rem;">From custom AI Agents to Autonomous Trading & Data Bots. We engineer the future of automation.</p>
-            <a href="#contact" class="btn-action">REQUEST SYSTEM BUILD</a>
-        </section>
 
-        <section class="ai-grid">
-            <div class="ai-card">
-                <span class="bot-tag">// NEURAL_INTERFACE</span>
-                <h3>Custom AI Agents</h3>
-                <p style="color:#777">Intelligent LLM-powered bots for customer support, lead generation, and complex logic tasks.</p>
-                <div class="code-box">
-                    class OmniBot:<br>
-                    &nbsp;&nbsp;def deploy(self):<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;return "Intelligence Active"
-                </div>
-            </div>
+<div class="glow-bg"></div>
 
-            <div class="ai-card">
-                <span class="bot-tag">// AUTOMATED_TASKING</span>
-                <h3>Autonomous Web Bots</h3>
-                <p style="color:#777">Scrapers, automated traders, and social media management bots designed to run 24/7.</p>
-                <div class="code-box">
-                    while True:<br>
-                    &nbsp;&nbsp;bot.scan_market()<br>
-                    &nbsp;&nbsp;bot.execute_trade()
-                </div>
-            </div>
+<div class="container">
+    <section class="hero">
+        <p style="color: var(--neon-pink); font-weight: bold; letter-spacing: 2px;">V2.0 AI SYSTEMS</p>
+        <h1>Smart Bots.<br>Real Money.</h1>
+        <p>We build Python bots that do the hard work for you.</p>
+        <a href="#contact" class="btn">Build My Bot →</a>
+    </section>
 
-            <div class="ai-card">
-                <span class="bot-tag">// CORE_SYSTEMS</span>
-                <h3>High-Speed Web Apps</h3>
-                <p style="color:#777">Next-Gen interfaces built to host your complex AI algorithms with zero lag.</p>
-                <div class="code-box">
-                    npm run build:production<br>
-                    >> Deployment Optimized [100%]
-                </div>
-            </div>
-        </section>
+    <section class="grid">
+        <div class="card">
+            <div class="code-line">> status: active</div>
+            <h3>Trading Bots</h3>
+            <p style="color: #888;">Auto-buy and sell assets. No more watching charts all day.</p>
+        </div>
+        <div class="card">
+            <div class="code-line">> neural: online</div>
+            <h3>AI Agents</h3>
+            <p style="color: #888;">Chatbots that can sell and talk like a real human.</p>
+        </div>
+        <div class="card">
+            <div class="code-line">> scrape: success</div>
+            <h3>Data Bots</h3>
+            <p style="color: #888;">Find customers and data from any website instantly.</p>
+        </div>
+    </section>
 
-        <section id="contact" style="padding: 100px 0; border-top: 1px solid var(--border);">
-            <div style="max-width: 600px;">
-                <h2 style="font-size: 3rem; margin-bottom: 20px;">BUILD_A_BOT.</h2>
-                <p style="color:#666; margin-bottom: 40px;">Describe the automation you need. Our architects will respond within 24 hours.</p>
-                <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
-                    <input type="text" name="name" placeholder="Name" style="width:100%; padding:20px; background:#050505; border:1px solid #111; color:white; margin-bottom:20px;">
-                    <input type="email" name="email" placeholder="Email" style="width:100%; padding:20px; background:#050505; border:1px solid #111; color:white; margin-bottom:20px;">
-                    <textarea name="message" placeholder="Project specs (e.g. 'I need a bot that...')" rows="5" style="width:100%; padding:20px; background:#050505; border:1px solid #111; color:white; margin-bottom:20px;"></textarea>
-                    <button type="submit" class="btn-action" style="width:100%; border:none; cursor:pointer;">SUBMIT SPECIFICATIONS</button>
-                </form>
-            </div>
-        </section>
-    </main>
+    <section id="contact" class="contact">
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Contact Us</h2>
+        <p style="color:#666; margin-bottom: 30px;">Tell us about your project.</p>
+        <form action="https://formspree.io/f/YOUR_ID" method="POST">
+            <input type="text" name="name" placeholder="Name" required><br>
+            <input type="email" name="email" placeholder="Email" required><br>
+            <textarea name="message" placeholder="I need a bot that..." rows="4"></textarea><br>
+            <button type="submit" class="btn" style="border:none; cursor:pointer;">Send Message</button>
+        </form>
+    </section>
+</div>
+
 </body>
 </html>
