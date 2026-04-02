@@ -3,67 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBUILD | SCALE YOUR BUSINESS</title>
+    <title>OMNIBUILD | PREMIUM SYSTEMS</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #000000;
             --blue: #00f2ff;
-            --glass: rgba(255, 255, 255, 0.04);
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background: var(--bg); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-        /* HERO SECTION */
-        #hero {
-            height: 100vh; display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; text-align: center;
-        }
-        .hero-h1 { font-size: clamp(3.5rem, 12vw, 6rem); font-weight: 800; letter-spacing: -3px; }
-        .hero-h1 span { color: var(--blue); text-shadow: 0 0 30px rgba(0, 242, 255, 0.5); }
+        /* ANIMATIONS */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glowPulse { 0% { box-shadow: 0 0 5px var(--blue); } 50% { box-shadow: 0 0 20px var(--blue); } 100% { box-shadow: 0 0 5px var(--blue); } }
+
+        /* HERO */
+        #hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero-h1 { font-size: clamp(3.5rem, 12vw, 6rem); font-weight: 800; letter-spacing: -3px; animation: fadeInUp 0.8s ease; }
+        .hero-h1 span { color: var(--blue); text-shadow: 0 0 30px var(--blue); }
 
         .start-btn {
-            background: var(--blue); color: #000; border: none;
-            padding: 20px 60px; border-radius: 50px; font-size: 1.3rem; font-weight: 800;
-            cursor: pointer; transition: 0.4s; margin-top: 30px;
+            background: var(--blue); color: #000; border: none; padding: 20px 60px; 
+            border-radius: 50px; font-size: 1.3rem; font-weight: 800; cursor: pointer; 
+            transition: 0.4s; margin-top: 30px; animation: glowPulse 2s infinite;
         }
-        .start-btn:hover { box-shadow: 0 0 50px var(--blue); transform: scale(1.05); }
+        .start-btn:hover { transform: scale(1.1); box-shadow: 0 0 50px var(--blue); }
 
-        /* FULLSCREEN OVERLAY SECTION */
+        /* OVERLAY LAYER */
         #content-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: #050505; transform: translateY(100%); transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            background: rgba(0,0,0,0.98); transform: translateY(100%); transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
             z-index: 100; overflow-y: auto; padding: 60px 20px;
         }
         #content-layer.active { transform: translateY(0); }
 
         .container { max-width: 900px; margin: 0 auto; }
 
-        /* STEP 1 2 3 ROADMAP */
-        .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 60px; }
-        .step-card { background: var(--glass); padding: 30px; border-radius: 20px; border-left: 4px solid var(--blue); }
-        .step-num { font-family: 'JetBrains Mono'; color: var(--blue); font-weight: bold; margin-bottom: 10px; display: block; }
-        .step-card h3 { margin-bottom: 10px; font-size: 1.2rem; }
-        .step-card p { font-size: 0.9rem; color: #888; line-height: 1.5; }
+        /* HIGHLIGHTED ROADMAP */
+        .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 60px; }
+        .step-card { 
+            background: var(--glass); padding: 35px; border-radius: 25px; border: 1px solid #222;
+            transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .step-card:hover { 
+            border-color: var(--blue); transform: translateY(-10px);
+            background: rgba(0, 242, 255, 0.05); box-shadow: 0 10px 40px rgba(0, 242, 255, 0.1);
+        }
+        .step-num { font-family: 'JetBrains Mono'; color: var(--blue); font-size: 0.9rem; font-weight: bold; margin-bottom: 15px; display: block; }
+        .step-card h3 { font-size: 1.4rem; margin-bottom: 10px; }
 
-        /* WHAT WE BUILD */
-        .build-section { margin-bottom: 60px; }
-        .build-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-        .build-item { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 25px; border-radius: 15px; }
-        .build-item h4 { color: var(--blue); margin-bottom: 8px; }
-        .build-item p { font-size: 0.9rem; color: #666; }
+        /* HIGHLIGHTED BUILD ITEMS */
+        .build-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+        .build-item { 
+            background: #080808; border: 1px solid #1a1a1a; padding: 30px; border-radius: 20px; 
+            transition: 0.3s; cursor: pointer;
+        }
+        .build-item:hover { 
+            background: #111; border-color: var(--blue); transform: scale(1.02);
+        }
+        .build-item h4 { color: var(--blue); font-size: 1.2rem; margin-bottom: 10px; text-transform: uppercase; }
 
-        /* FORM SECTION */
-        #contact-box { background: #000; border: 1px solid var(--blue); padding: 40px; border-radius: 30px; margin-top: 40px; }
-        input, textarea { width: 100%; padding: 18px; background: #0a0a0a; border: 1px solid #222; color: white; border-radius: 12px; margin-bottom: 12px; font-family: inherit; }
-        .submit-btn { width: 100%; background: var(--blue); color: #000; padding: 20px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; font-size: 1.1rem; }
+        /* CONTACT FORM POP */
+        #contact-box { 
+            background: #000; border: 2px solid var(--blue); padding: 50px; 
+            border-radius: 35px; margin-top: 60px; box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+        }
+        input, textarea { 
+            width: 100%; padding: 20px; background: #0a0a0a; border: 1px solid #222; 
+            color: white; border-radius: 15px; margin-bottom: 15px; font-family: inherit; transition: 0.3s;
+        }
+        input:focus, textarea:focus { border-color: var(--blue); background: #111; }
+        .submit-btn { width: 100%; background: var(--blue); color: #000; padding: 20px; border-radius: 15px; border: none; font-weight: 800; cursor: pointer; font-size: 1.2rem; }
 
-        /* SUCCESS MESSAGE */
-        #thanks-msg { display: none; text-align: center; padding: 100px 20px; }
-        .thanks-h2 { color: var(--blue); font-size: 3rem; margin-bottom: 15px; }
-
-        .back-btn { color: #444; cursor: pointer; display: block; margin-top: 30px; text-align: center; }
+        .back-btn { color: #555; cursor: pointer; display: block; margin-top: 40px; text-align: center; font-weight: bold; }
+        .back-btn:hover { color: #fff; }
 
         @media (max-width: 600px) { .build-grid { grid-template-columns: 1fr; } }
     </style>
@@ -72,71 +87,71 @@
 
     <section id="hero">
         <h1 class="hero-h1">OMNI<span>BUILD</span></h1>
-        <p style="color: #444; font-family: 'JetBrains Mono'; margin-top: 10px;">BOOST SALES // AUTOMATE GROWTH</p>
+        <p style="color: #666; font-family: 'JetBrains Mono'; margin-top: 15px; letter-spacing: 2px;">PREMIUM AI & WEB SOLUTIONS</p>
         <button class="start-btn" onclick="openSystem()">LET'S START</button>
     </section>
 
     <section id="content-layer">
         <div class="container" id="main-content">
-            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 50px;">The 3-Step Growth Plan</h2>
+            <h2 style="font-size: 3rem; text-align: center; margin-bottom: 60px;">The Growth Plan.</h2>
             
             <div class="roadmap">
                 <div class="step-card">
-                    <span class="step-num">STEP 01</span>
-                    <h3>Build Digital Base</h3>
-                    <p>We create a high-speed website to capture your customers and boost your professional brand.</p>
+                    <span class="step-num">01. INFRASTRUCTURE</span>
+                    <h3>High-End Websites</h3>
+                    <p style="color: #888;">We build websites that don't just look good—they convert visitors into high-paying clients.</p>
                 </div>
                 <div class="step-card">
-                    <span class="step-num">STEP 02</span>
-                    <h3>Deploy AI Bots</h3>
-                    <p>We install Python AI to find leads, send DMs, and automate your boring manual daily tasks.</p>
+                    <span class="step-num">02. AUTOMATION</span>
+                    <h3>Custom AI Bots</h3>
+                    <p style="color: #888;">We deploy Python AI to handle sales, DMs, and data while you focus on business strategy.</p>
                 </div>
                 <div class="step-card">
-                    <span class="step-num">STEP 03</span>
-                    <h3>Scale Your Profit</h3>
-                    <p>Your systems work 24/7. More sales, zero errors, and 20+ hours saved every single week.</p>
+                    <span class="step-num">03. SCALE</span>
+                    <h3>Boost Your Revenue</h3>
+                    <p style="color: #888;">Our systems run 24/7 to boost your sales and save you 20+ hours of manual work every week.</p>
                 </div>
             </div>
 
-            <div class="build-section">
-                <h2 style="text-align: center; margin-bottom: 30px;">What We Build For You</h2>
+            <div style="margin-top: 100px;">
+                <h2 style="text-align: center; margin-bottom: 40px;">What We Build.</h2>
                 <div class="build-grid">
                     <div class="build-item">
-                        <h4>Premium Websites</h4>
-                        <p>Modern, SEO-friendly landing pages that turn visitors into paying customers.</p>
+                        <h4>Website Sales</h4>
+                        <p>Modern, SEO-friendly landing pages that dominate your local market.</p>
                     </div>
                     <div class="build-item">
-                        <h4>AI Instagram Bots</h4>
-                        <p>Auto-growth and DM systems to find your target audience while you sleep.</p>
+                        <h4>Instagram AI</h4>
+                        <p>Automated growth and target-audience outreach bots for 24/7 engagement.</p>
                     </div>
                     <div class="build-item">
-                        <h4>Web Scrapers</h4>
-                        <p>Extract thousands of emails and phone numbers from Google Maps instantly.</p>
+                        <h4>Data Scrapers</h4>
+                        <p>Pull 10,000+ leads from Google Maps or LinkedIn in minutes.</p>
                     </div>
                     <div class="build-item">
-                        <h4>Trading & Logic Bots</h4>
-                        <p>Custom Python scripts for crypto, stock signals, or complex office tasks.</p>
+                        <h4>Python Logic</h4>
+                        <p>Custom scripts to automate complex trading, office, or gaming tasks.</p>
                     </div>
                 </div>
             </div>
 
             <div id="contact-box">
-                <h3 style="margin-bottom: 20px; text-align: center;">Secure Your System</h3>
+                <h3 style="margin-bottom: 25px; text-align: center; font-size: 2rem;">Secure Your Quote.</h3>
                 <form action="https://formspree.io/f/xgoplkee" method="POST" id="omni-form">
-                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="text" name="name" placeholder="Name" required>
                     <input type="email" name="email" placeholder="Business Email" required>
-                    <textarea name="message" placeholder="Which service do you need? (Website, AI Bot, or Scraper?)" rows="4" required></textarea>
+                    <textarea name="message" placeholder="What should we build for your business?" rows="4" required></textarea>
                     <button type="submit" class="submit-btn">SEND REQUEST</button>
                 </form>
             </div>
 
-            <span class="back-btn" onclick="closeSystem()">← BACK TO HOME</span>
+            <span class="back-btn" onclick="closeSystem()">← BACK TO SYSTEM START</span>
         </div>
 
-        <div class="container" id="thanks-msg">
-            <h2 class="thanks-h2">Success!</h2>
-            <p style="color: #888; font-size: 1.2rem;">Your request is in our system.<br>We will reply with a price quote in <b>24 hours</b>.</p>
-            <button class="start-btn" onclick="closeSystem()">SYSTEM EXIT</button>
+        <div class="container" id="thanks-msg" style="display: none; text-align: center; padding-top: 100px;">
+            <h2 style="color: var(--blue); font-size: 4rem; margin-bottom: 20px;">SUCCESS!</h2>
+            <p style="color: #888; font-size: 1.5rem;">Your signal has been received.<br>Our team will reply in <b>24 Hours</b>.</p>
+            <button class="start-btn" onclick="closeSystem()">EXIT SYSTEM</button>
         </div>
     </section>
 
