@@ -3,118 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBUILD | Next-Gen Digital Systems</title>
+    <title>OMNIBUILD | AI & Automation Architects</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #020202;
             --primary: #007bff;
-            --primary-rgb: 0, 123, 255;
+            --primary-glow: rgba(0, 123, 255, 0.4);
+            --terminal-green: #00ff41;
             --border: rgba(255, 255, 255, 0.05);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; cursor: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background: var(--bg); color: #fff; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
 
-        /* Custom Cursor */
-        #cursor { width: 20px; height: 20px; border: 2px solid var(--primary); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.1s; }
-
-        /* Dynamic Grid Background */
-        .grid-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 40px 40px; z-index: -1;
-            mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black 0%, transparent 50%);
+        /* Scanning Line Animation */
+        .scanline {
+            width: 100%; height: 2px; background: rgba(0, 123, 255, 0.1);
+            position: fixed; top: 0; z-index: 10;
+            animation: scan 4s linear infinite;
         }
+        @keyframes scan { from { top: 0; } to { top: 100%; } }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
-        /* Hero Section */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        /* Hero: The Brain of the Site */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero h1 { font-size: clamp(3rem, 10vw, 7rem); line-height: 0.9; margin-bottom: 20px; }
+        .hero span { color: var(--primary); font-weight: 800; }
+
+        /* AI Service Grid */
+        .ai-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; padding: 100px 0; }
         
-        .status-tag { font-family: 'JetBrains Mono'; color: var(--primary); font-size: 0.8rem; margin-bottom: 20px; border: 1px solid var(--primary); padding: 5px 15px; border-radius: 100px; background: rgba(var(--primary-rgb), 0.1); }
-
-        h1 { font-size: clamp(3.5rem, 12vw, 8.5rem); font-weight: 700; line-height: 0.85; letter-spacing: -4px; margin-bottom: 30px; }
-        h1 span { color: var(--primary); text-shadow: 0 0 30px var(--primary-glow); }
-
-        /* Interactive Buttons */
-        .btn-main {
-            background: #fff; color: #000; padding: 20px 50px; border-radius: 5px;
-            font-weight: 700; text-decoration: none; display: inline-block;
-            transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1); clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        .ai-card {
+            background: rgba(10, 10, 10, 0.6); border: 1px solid var(--border);
+            padding: 50px; border-radius: 24px; position: relative; overflow: hidden;
+            transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .btn-main:hover { background: var(--primary); color: #fff; transform: scale(1.05) skewX(-5deg); }
-
-        /* Bento-Style Services */
-        .services { padding: 150px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .bento-card {
-            background: rgba(255,255,255,0.02); border: 1px solid var(--border);
-            padding: 40px; border-radius: 20px; transition: 0.4s; position: relative; overflow: hidden;
+        .ai-card:hover { border-color: var(--primary); transform: scale(1.02); background: #080808; }
+        
+        .bot-tag { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--primary); margin-bottom: 15px; display: block; }
+        
+        /* The "Code Snippet" styling for the cards */
+        .code-box {
+            font-family: 'JetBrains Mono', monospace; background: #000;
+            padding: 15px; border-radius: 10px; font-size: 0.8rem;
+            color: var(--terminal-green); border: 1px solid #111; margin-top: 20px;
         }
-        .bento-card:hover { border-color: var(--primary); background: rgba(var(--primary-rgb), 0.05); transform: translateY(-10px); }
-        .bento-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--primary); }
 
-        /* Contact Form Upgrade */
-        .contact { padding: 100px 0; background: linear-gradient(to bottom, transparent, #050505); }
-        .form-box { background: #0a0a0a; border: 1px solid var(--border); padding: 50px; border-radius: 30px; }
-        input, textarea { width: 100%; padding: 20px; background: transparent; border: none; border-bottom: 1px solid var(--border); color: #fff; margin-bottom: 30px; font-size: 1.1rem; }
-        input:focus { outline: none; border-color: var(--primary); }
+        .btn-action {
+            background: var(--primary); color: white; padding: 20px 50px;
+            text-decoration: none; font-weight: bold; display: inline-block;
+            border-radius: 4px; box-shadow: 0 0 30px var(--primary-glow);
+            transition: 0.3s; margin-top: 30px;
+        }
+        .btn-action:hover { letter-spacing: 2px; background: #fff; color: #000; }
 
     </style>
 </head>
 <body>
-    <div id="cursor"></div>
-    <div class="grid-overlay"></div>
+    <div class="scanline"></div>
     
     <main class="container">
         <section class="hero">
-            <div class="status-tag">SYSTEM_READY // OMNIBUILD_V2.0</div>
-            <h1>BEYOND<br><span>DIGITAL.</span></h1>
-            <p style="color: #666; font-size: 1.4rem; max-width: 550px; margin-bottom: 50px;">Architecting high-performance digital infrastructure for businesses that refuse to be normal.</p>
-            <a href="#contact" class="btn-main">INITIALIZE BUILD →</a>
+            <p style="font-family: 'JetBrains Mono'; color: var(--primary);">[ INITIALIZING OMNIBUILD_INTELLIGENCE ]</p>
+            <h1>WE BUILD<br><span>THE BOTS</span><br>THAT BUILD<br>BUSINESS.</h1>
+            <p style="color: #666; max-width: 500px; font-size: 1.2rem;">From custom AI Agents to Autonomous Trading & Data Bots. We engineer the future of automation.</p>
+            <a href="#contact" class="btn-action">REQUEST SYSTEM BUILD</a>
         </section>
 
-        <section class="services">
-            <div class="bento-card" style="grid-column: span 2;">
-                <h3>01 / CORE SYSTEMS</h3>
-                <p style="color:#888">Bespoke web development optimized for extreme speed and conversion metrics. We don't just build sites; we build revenue engines.</p>
+        <section class="ai-grid">
+            <div class="ai-card">
+                <span class="bot-tag">// NEURAL_INTERFACE</span>
+                <h3>Custom AI Agents</h3>
+                <p style="color:#777">Intelligent LLM-powered bots for customer support, lead generation, and complex logic tasks.</p>
+                <div class="code-box">
+                    class OmniBot:<br>
+                    &nbsp;&nbsp;def deploy(self):<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return "Intelligence Active"
+                </div>
             </div>
-            <div class="bento-card">
-                <h3>02 / IDENTITY</h3>
-                <p style="color:#888">Visual branding that commands authority and trust.</p>
+
+            <div class="ai-card">
+                <span class="bot-tag">// AUTOMATED_TASKING</span>
+                <h3>Autonomous Web Bots</h3>
+                <p style="color:#777">Scrapers, automated traders, and social media management bots designed to run 24/7.</p>
+                <div class="code-box">
+                    while True:<br>
+                    &nbsp;&nbsp;bot.scan_market()<br>
+                    &nbsp;&nbsp;bot.execute_trade()
+                </div>
             </div>
-            <div class="bento-card">
-                <h3>03 / AI AUTOMATION</h3>
-                <p style="color:#888">Integrating custom Python AI solutions into your daily workflow.</p>
-            </div>
-            <div class="bento-card" style="grid-column: span 2;">
-                <h3>04 / SEO DOMINANCE</h3>
-                <p style="color:#888">Data-driven strategies to put your business at the top of the search stack.</p>
+
+            <div class="ai-card">
+                <span class="bot-tag">// CORE_SYSTEMS</span>
+                <h3>High-Speed Web Apps</h3>
+                <p style="color:#777">Next-Gen interfaces built to host your complex AI algorithms with zero lag.</p>
+                <div class="code-box">
+                    npm run build:production<br>
+                    >> Deployment Optimized [100%]
+                </div>
             </div>
         </section>
 
-        <section id="contact" class="contact">
-            <div class="form-box">
-                <h2 style="font-size: 3rem; margin-bottom: 40px;">CONNECT_</h2>
+        <section id="contact" style="padding: 100px 0; border-top: 1px solid var(--border);">
+            <div style="max-width: 600px;">
+                <h2 style="font-size: 3rem; margin-bottom: 20px;">BUILD_A_BOT.</h2>
+                <p style="color:#666; margin-bottom: 40px;">Describe the automation you need. Our architects will respond within 24 hours.</p>
                 <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
-                    <input type="text" name="name" placeholder="CLIENT_NAME" required>
-                    <input type="email" name="email" placeholder="CONTACT_EMAIL" required>
-                    <textarea name="message" placeholder="PROJECT_SPECIFICATIONS" rows="4"></textarea>
-                    <button type="submit" class="btn-main" style="width: 100%; border: none; cursor: pointer;">SEND SIGNAL</button>
+                    <input type="text" name="name" placeholder="Name" style="width:100%; padding:20px; background:#050505; border:1px solid #111; color:white; margin-bottom:20px;">
+                    <input type="email" name="email" placeholder="Email" style="width:100%; padding:20px; background:#050505; border:1px solid #111; color:white; margin-bottom:20px;">
+                    <textarea name="message" placeholder="Project specs (e.g. 'I need a bot that...')" rows="5" style="width:100%; padding:20px; background:#050505; border:1px solid #111; color:white; margin-bottom:20px;"></textarea>
+                    <button type="submit" class="btn-action" style="width:100%; border:none; cursor:pointer;">SUBMIT SPECIFICATIONS</button>
                 </form>
             </div>
         </section>
     </main>
-
-    <script>
-        // Grid following mouse logic
-        document.addEventListener('mousemove', e => {
-            document.body.style.setProperty('--x', e.clientX + 'px');
-            document.body.style.setProperty('--y', e.clientY + 'px');
-            const cursor = document.getElementById('cursor');
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-    </script>
 </body>
 </html>
