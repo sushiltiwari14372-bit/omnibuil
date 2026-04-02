@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBUILD | AI SYSTEMS</title>
+    <title>OMNIBUILD | CLICK TO START</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #000000;
             --neon-blue: #00f2ff;
+            --neon-pink: #ff007a;
             --glass: rgba(255, 255, 255, 0.03);
         }
 
@@ -17,37 +18,48 @@
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        nav {
-            position: fixed; top: 0; left: 0; width: 100%; height: 80px;
-            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex; align-items: center; z-index: 1000;
-        }
-        .nav-content { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        
-        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
+        /* Navigation */
+        nav { position: fixed; top: 0; width: 100%; height: 80px; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid #111; z-index: 1000; display: flex; align-items: center; }
+        .nav-content { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; }
+        .logo { font-weight: 800; font-size: 1.5rem; }
         .logo span { color: var(--neon-blue); }
-        .status-dot { width: 8px; height: 8px; background: #27c93f; border-radius: 50%; box-shadow: 0 0 10px #27c93f; }
 
-        .hero { height: 70vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 800; line-height: 0.9; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 60px 0; }
-        .card { background: var(--glass); padding: 40px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
-        .card:hover { border-color: var(--neon-blue); transform: translateY(-5px); }
-        .card h3 { color: var(--neon-blue); margin-bottom: 10px; }
-
-        /* CONTACT FORM STYLING */
-        .contact { padding: 80px 0; border-top: 1px solid #111; }
-        .contact h2 { font-size: 2.5rem; margin-bottom: 10px; text-align: center; }
-        .contact p { text-align: center; color: #888; margin-bottom: 40px; }
+        /* Hero */
+        .hero { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero h1 { font-size: 4rem; font-weight: 800; margin-bottom: 10px; }
         
-        form { max-width: 600px; margin: 0 auto; }
-        input, textarea { width: 100%; padding: 20px; background: #0a0a0a; border: 1px solid #222; color: white; border-radius: 12px; margin-bottom: 15px; font-family: inherit; font-size: 1rem; }
-        input:focus, textarea:focus { border-color: var(--neon-blue); outline: none; }
+        /* THE CLICKABLE BUTTONS */
+        .button-row { display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
+        
+        .click-btn { 
+            background: #111; color: white; padding: 15px 30px; border-radius: 12px; 
+            border: 1px solid #333; cursor: pointer; transition: 0.3s; font-weight: bold;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .click-btn:hover { 
+            background: var(--neon-blue); color: #000; transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+        .click-btn:active { transform: scale(0.95); }
 
-        .btn { background: var(--neon-blue); color: #000; padding: 20px 45px; border-radius: 12px; font-weight: 800; text-decoration: none; display: inline-block; width: 100%; border: none; cursor: pointer; transition: 0.3s; font-size: 1.1rem; }
-        .btn:hover { background: #fff; box-shadow: 0 0 30px var(--neon-blue); }
+        /* Product Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 60px 0; }
+        .card { 
+            background: var(--glass); padding: 40px; border-radius: 25px; 
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
+        }
+        .card:hover { border-color: var(--neon-pink); background: rgba(255, 0, 122, 0.05); }
+
+        /* CONTACT FORM */
+        .contact { padding: 80px 0; background: #050505; border-radius: 40px; margin-bottom: 50px; border: 1px solid #111; }
+        input, textarea { width: 100%; padding: 20px; background: #000; border: 1px solid #222; color: white; border-radius: 12px; margin-bottom: 15px; }
+        
+        .main-btn { 
+            width: 100%; background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+            color: white; padding: 20px; border-radius: 12px; border: none; font-weight: 800;
+            font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+        }
+        .main-btn:hover { box-shadow: 0 0 40px rgba(0, 242, 255, 0.5); transform: scale(1.02); }
 
     </style>
 </head>
@@ -56,43 +68,44 @@
     <nav>
         <div class="nav-content">
             <div class="logo">OMNI<span>BUILD</span></div>
-            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.8rem; font-family: 'JetBrains Mono'; color: #888;">
-                <div class="status-dot"></div> SYSTEM ONLINE
-            </div>
+            <div style="color: #27c93f; font-size: 0.8rem;">● SYSTEMS ACTIVE</div>
         </div>
     </nav>
 
     <div class="container">
         <section class="hero">
-            <h1>AUTOMATE<br>EVERYTHING.</h1>
-            <p style="color: #666; font-size: 1.2rem; max-width: 500px;">Expert AI Bots and Python automation built by Vibhor Tiwari.</p>
+            <h1>What do you need?</h1>
+            <p style="color: #666;">Click a button to select your service.</p>
+            
+            <div class="button-row">
+                <button class="click-btn" onclick="document.getElementById('msg').value='I need an Instagram Bot. Please send price.'">📸 Instagram Bot</button>
+                <button class="click-btn" onclick="document.getElementById('msg').value='I need a Custom Trading Bot. Send more info.'">📈 Trading Bot</button>
+                <button class="click-btn" onclick="document.getElementById('msg').value='I need a Web Scraper. How much is the price?'">🔍 Web Scraper</button>
+                <button class="click-btn" onclick="document.getElementById('msg').value='I want to talk about a custom AI idea.'">⚡ Custom AI</button>
+            </div>
         </section>
 
         <section class="grid">
             <div class="card">
-                <h3>Instagram Growth</h3>
-                <p>Bots to grow your account to 10k+ followers automatically.</p>
+                <h3>Vibhor Tiwari</h3>
+                <p>Lead Developer at OmniBuild. I build the scripts that run your business.</p>
             </div>
             <div class="card">
-                <h3>Lead Scrapers</h3>
-                <p>Extract 1000s of emails from any site into Excel.</p>
-            </div>
-            <div class="card">
-                <h3>Trading Bots</h3>
-                <p>Automate your crypto or stock strategy 24/7.</p>
+                <h3>Fast Delivery</h3>
+                <p>Most bots are ready in 48-72 hours. No waiting for weeks.</p>
             </div>
         </section>
 
         <section id="contact" class="contact">
-            <h2>Let's Build.</h2>
-            <p>Contact us for more information, help, or a price quote.</p>
-            
-            <form action="https://formspree.io/f/YOUR_ID" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Business Email" required>
-                <textarea name="message" placeholder="How can we help you? Describe your project or ask for a price quote..." rows="5" required></textarea>
-                <button type="submit" class="btn">GET A QUOTE →</button>
-            </form>
+            <div style="max-width: 600px; margin: 0 auto; padding: 0 20px;">
+                <h2 style="margin-bottom: 20px; text-align: center;">Send Message</h2>
+                <form action="https://formspree.io/f/YOUR_ID" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea id="msg" name="message" placeholder="How can we help you? Click the buttons above to auto-fill this!" rows="5" required></textarea>
+                    <button type="submit" class="main-btn">CHECK PRICE & AVAILABILITY →</button>
+                </form>
+            </div>
         </section>
     </div>
 
