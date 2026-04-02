@@ -3,102 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBUILD | WEBSITES & AI</title>
+    <title>OMNIBUILD | SUCCESS SYSTEM</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #000000;
             --blue: #00f2ff;
-            --pink: #ff007a;
             --glass: rgba(255, 255, 255, 0.03);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background: var(--bg); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; padding-top: 80px; }
+        body { background: var(--bg); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        /* Navigation */
-        nav { position: fixed; top: 0; width: 100%; height: 80px; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #111; z-index: 1000; display: flex; align-items: center; }
-        .nav-content { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; }
-        .logo { font-weight: 800; font-size: 1.5rem; }
-        .logo span { color: var(--blue); }
-
-        /* Hero */
-        .hero { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; margin-bottom: 15px; background: linear-gradient(to right, #fff, var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        /* SERVICE GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 50px 0; }
-        .card { background: var(--glass); padding: 40px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
-        .card:hover { border-color: var(--blue); transform: translateY(-5px); }
-        .card h3 { color: var(--blue); margin-bottom: 10px; font-size: 1.5rem; }
-        .card p { color: #888; font-size: 0.95rem; line-height: 1.5; }
-
-        /* BUTTONS */
-        .button-row { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
-        .click-btn { 
-            background: #111; color: white; padding: 12px 20px; border-radius: 10px; 
-            border: 1px solid #333; cursor: pointer; transition: 0.3s; font-weight: bold; font-size: 0.9rem;
+        /* HERO SECTION */
+        #hero {
+            height: 100vh; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center;
+            transition: 0.8s ease;
         }
-        .click-btn:hover { background: var(--blue); color: #000; }
+        .hero-h1 { font-size: 5rem; font-weight: 800; margin-bottom: 20px; }
+        .hero-h1 span { color: var(--blue); }
 
-        /* CONTACT FORM */
-        .contact { padding: 80px 0; border-top: 1px solid #111; }
-        input, textarea { width: 100%; padding: 20px; background: #0a0a0a; border: 1px solid #222; color: white; border-radius: 12px; margin-bottom: 15px; font-family: inherit; }
-        .main-btn { width: 100%; background: linear-gradient(45deg, var(--blue), var(--pink)); color: white; padding: 20px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; }
+        .start-btn {
+            background: transparent; color: var(--blue); border: 2px solid var(--blue);
+            padding: 18px 50px; border-radius: 50px; font-size: 1.2rem; font-weight: 800;
+            cursor: pointer; transition: 0.4s;
+        }
+        .start-btn:hover { background: var(--blue); color: #000; box-shadow: 0 0 30px var(--blue); }
+
+        /* SLIDE UP SECTION */
+        #next-step {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: #050505; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            transform: translateY(100%); transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 100; padding: 20px;
+        }
+        #next-step.active { transform: translateY(0); }
+
+        /* FORM STYLING */
+        #contact-form { width: 100%; max-width: 500px; transition: 0.5s; }
+        input, textarea { 
+            width: 100%; padding: 18px; background: #0a0a0a; border: 1px solid #222; 
+            color: white; border-radius: 12px; margin-bottom: 12px; font-family: inherit;
+        }
+        .submit-btn { 
+            width: 100%; background: var(--blue); color: #000; padding: 18px; 
+            border-radius: 12px; border: none; font-weight: 800; cursor: pointer; font-size: 1rem;
+        }
+
+        /* THANK YOU MESSAGE (Hidden by default) */
+        #thanks-msg { 
+            display: none; text-align: center; animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .thanks-h2 { color: var(--blue); font-size: 2.5rem; margin-bottom: 10px; }
+        .thanks-p { color: #888; font-size: 1.1rem; }
+
+        .close-btn { margin-top: 30px; color: #444; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-content">
-            <div class="logo">OMNI<span>BUILD</span></div>
-            <div style="color: #27c93f; font-size: 0.8rem;">● ACCEPTING PROJECTS</div>
+    <section id="hero">
+        <h1 class="hero-h1">OMNI<span>BUILD</span></h1>
+        <p style="color: #555; margin-bottom: 30px;">High-End AI & Web Solutions.</p>
+        <button class="start-btn" onclick="showNext()">LET'S START</button>
+    </section>
+
+    <section id="next-step">
+        
+        <div id="contact-form">
+            <h2 style="font-size: 2rem; margin-bottom: 25px; text-align: center;">Ready to grow?</h2>
+            <form action="https://formspree.io/f/YOUR_ID" method="POST" id="my-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Business Email" required>
+                <textarea name="message" placeholder="How can we help your business?" rows="4" required></textarea>
+                <button type="submit" class="submit-btn">SEND REQUEST</button>
+            </form>
+            <div class="close-btn" style="text-align: center;" onclick="hideNext()">← BACK</div>
         </div>
-    </nav>
 
-    <div class="container">
-        <section class="hero">
-            <h1>We Build Websites<br>& AI Systems.</h1>
-            <p style="color: #666; max-width: 600px;">From high-speed websites to smart Python bots. We build the tech for your business.</p>
-            
-            <div class="button-row">
-                <button class="click-btn" onclick="document.getElementById('msg').value='I need a new Website for my business. Please send price.'">🌐 Build Website</button>
-                <button class="click-btn" onclick="document.getElementById('msg').value='I need an Instagram Bot to grow my brand.'">🤖 Build AI Bot</button>
-                <button class="click-btn" onclick="document.getElementById('msg').value='I need a Scraper to find customers. How much?'">🔍 Find Leads</button>
-            </div>
-        </section>
+        <div id="thanks-msg">
+            <h2 class="thanks-h2">Thanks!</h2>
+            <p class="thanks-p">We received your signal.<br>We will reply to you in <b>24 hours</b>.</p>
+            <button class="start-btn" style="margin-top: 30px; font-size: 0.9rem;" onclick="hideNext()">CLOSE</button>
+        </div>
 
-        <section class="grid">
-            <div class="card">
-                <h3>Premium Websites</h3>
-                <p>We build fast, modern websites that work on mobile and PC. SEO optimized to find you more customers.</p>
-            </div>
-            <div class="card">
-                <h3>AI & Automation</h3>
-                <p>Smart Python scripts that handle your DMs, emails, and data 24/7 with zero mistakes.</p>
-            </div>
-            <div class="card">
-                <h3>Lead Generation</h3>
-                <p>Get thousands of emails and phone numbers from Google Maps and Instagram automatically.</p>
-            </div>
-        </section>
+    </section>
 
-        <section id="contact" class="contact">
-            <div style="max-width: 600px; margin: 0 auto;">
-                <h2 style="margin-bottom: 10px; text-align: center;">Start Your Project</h2>
-                <p style="text-align: center; color: #555; margin-bottom: 30px;">Contact us for more information or a price quote.</p>
-                <form action="https://formspree.io/f/YOUR_ID" method="POST">
-                    <input type="text" name="name" placeholder="Full Name" required>
-                    <input type="email" name="email" placeholder="Business Email" required>
-                    <textarea id="msg" name="message" placeholder="How can we help? (Click buttons above to auto-fill)" rows="5" required></textarea>
-                    <button type="submit" class="main-btn">GET A PRICE QUOTE →</button>
-                </form>
-            </div>
-        </section>
-    </div>
+    <script>
+        function showNext() {
+            document.getElementById('next-step').classList.add('active');
+        }
+
+        function hideNext() {
+            document.getElementById('next-step').classList.remove('active');
+            // Reset form for next time
+            setTimeout(() => {
+                document.getElementById('contact-form').style.display = 'block';
+                document.getElementById('thanks-msg').style.display = 'none';
+            }, 700);
+        }
+
+        // Form Submission Logic
+        const form = document.getElementById("my-form");
+        form.onsubmit = function(e) {
+            // This part sends the data and shows the thanks message
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('thanks-msg').style.display = 'block';
+        };
+    </script>
 
 </body>
 </html>
