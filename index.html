@@ -3,139 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBUILD | AI AUTOMATION</title>
+    <title>OMNIBUILD | LIVE AI SYSTEMS</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #000000;
-            --electric-blue: #00d2ff;
-            --neon-purple: #9d00ff;
+            --neon-blue: #00f2ff;
+            --neon-purple: #7000ff;
             --glass: rgba(255, 255, 255, 0.03);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background: var(--bg); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-        /* Animated Background */
-        .bg-glow {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #0a0a0a, #000);
-            z-index: -2;
-        }
-
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
         /* Hero Section */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        
-        /* Floating Badge */
-        .live-badge { font-family: 'JetBrains Mono'; color: var(--electric-blue); border: 1px solid var(--electric-blue); padding: 6px 15px; border-radius: 50px; font-size: 0.8rem; margin-bottom: 25px; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
-
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
         .hero h1 { 
-            font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 800; line-height: 0.9; margin-bottom: 20px;
-            background: linear-gradient(to bottom right, #fff, var(--electric-blue), var(--neon-purple));
+            font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; line-height: 0.9; margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--neon-blue));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Stats Bar - Very Attractive for Clients */
-        .stats-bar { display: flex; justify-content: center; gap: 40px; margin-top: 40px; font-family: 'JetBrains Mono'; }
-        .stat-item span { display: block; color: var(--electric-blue); font-size: 1.5rem; font-weight: bold; }
-        .stat-item p { font-size: 0.7rem; color: #555; text-transform: uppercase; }
-
-        /* Product Cards */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; padding: 100px 0; }
+        /* LIVE TERMINAL (This attracts people) */
+        .terminal-window {
+            width: 100%; max-width: 600px; background: #080808; border: 1px solid #222;
+            border-radius: 12px; padding: 20px; font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); margin-top: 20px;
+        }
+        .terminal-header { display: flex; gap: 8px; margin-bottom: 15px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
         
+        .terminal-body { color: #888; font-size: 0.9rem; min-height: 100px; }
+        .cursor { display: inline-block; width: 8px; height: 15px; background: var(--neon-blue); animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Product Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 100px 0; }
         .card { 
-            background: var(--glass); padding: 45px; border-radius: 35px; 
-            border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(15px);
-            transition: 0.4s; position: relative;
+            background: var(--glass); padding: 40px; border-radius: 25px; 
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
         }
-        .card:hover { 
-            transform: translateY(-10px);
-            border-color: var(--neon-purple);
-            box-shadow: 0 20px 40px rgba(157, 0, 255, 0.15);
-        }
-        
-        .card h3 { font-size: 1.8rem; margin-bottom: 15px; }
-        .card p { color: #888; font-size: 1rem; line-height: 1.6; }
+        .card:hover { border-color: var(--neon-blue); background: rgba(0, 242, 255, 0.05); transform: scale(1.02); }
+        .card h3 { color: var(--neon-blue); margin-bottom: 10px; }
 
-        /* "Demand" Tag */
-        .tag { display: inline-block; background: rgba(0, 210, 255, 0.1); color: var(--electric-blue); padding: 4px 12px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; }
+        /* Progress Bar (Shows how busy you are) */
+        .slot-tag { color: #27c93f; font-weight: bold; font-size: 0.8rem; margin-top: 15px; display: block; }
 
-        /* Button Styling */
         .btn { 
-            background: #fff; color: #000; padding: 22px 55px; border-radius: 100px; 
-            font-weight: 800; text-decoration: none; display: inline-block; transition: 0.3s;
-            box-shadow: 0 10px 30px rgba(255,255,255,0.2); margin-top: 30px;
+            background: var(--neon-blue); color: #000; padding: 18px 45px; border-radius: 8px; 
+            font-weight: 800; text-decoration: none; display: inline-block; margin-top: 30px;
         }
-        .btn:hover { background: var(--electric-blue); transform: scale(1.05); box-shadow: 0 0 40px var(--electric-blue); }
+        .btn:hover { background: #fff; box-shadow: 0 0 30px var(--neon-blue); }
 
-        /* Form Styling */
-        .contact { padding: 100px 0; border-top: 1px solid #111; }
-        .form-container { max-width: 600px; margin: 0 auto; }
-        input, textarea { width: 100%; padding: 22px; background: #080808; border: 1px solid #222; color: white; border-radius: 18px; margin-bottom: 15px; font-size: 1rem; }
-        input:focus { border-color: var(--electric-blue); outline: none; }
-
+        input, textarea { width: 100%; padding: 20px; background: #0a0a0a; border: 1px solid #222; color: white; border-radius: 10px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
-<div class="bg-glow"></div>
-
 <div class="container">
     <section class="hero">
-        <div class="live-badge">● AI AGENTS OPERATIONAL</div>
-        <h1>BUILDING<br>THE NEXT<br>SYSTEM.</h1>
-        <p style="color: #666; max-width: 500px; font-size: 1.2rem; margin-top: 20px;">We replace boring manual work with fast AI bots. Save time. Grow faster.</p>
+        <p style="color: var(--neon-blue); font-family: 'JetBrains Mono'; margin-bottom: 10px;">[ SERVER_STATUS: ONLINE ]</p>
+        <h1>AUTOMATE<br>EVERYTHING.</h1>
+        <p style="color: #666; font-size: 1.2rem; max-width: 500px;">We build AI Bots that work 24/7 so you don't have to. Real systems for real business.</p>
         
-        <div class="stats-bar">
-            <div class="stat-item"><span>24/7</span><p>Run Time</p></div>
-            <div class="stat-item"><span>100%</span><p>Automated</p></div>
-            <div class="stat-item"><span>0.1s</span><p>Response</p></div>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+            </div>
+            <div class="terminal-body" id="terminal-text">
+                > Initializing Bot_Engine...<br>
+                > Scanning for leads...<br>
+                > Found 12 high-value targets.<br>
+                > <span class="cursor"></span>
+            </div>
         </div>
 
-        <a href="#contact" class="btn">SECURE YOUR SYSTEM →</a>
+        <a href="#contact" class="btn">REQUEST A BUILD</a>
     </section>
 
-    <div class="grid">
+    <section class="grid">
         <div class="card">
-            <div class="tag">High Demand</div>
-            <h3>Instagram AI Bots</h3>
-            <p>A bot that finds your target customers, likes their posts, and sends them smart DMs to grow your brand while you sleep.</p>
+            <h3>Instagram Auto-Growth</h3>
+            <p>Bots that find your audience and grow your page 24/7.</p>
+            <span class="slot-tag">● 2 SLOTS LEFT</span>
         </div>
-
         <div class="card">
-            <div class="tag">Top Rated</div>
-            <h3>Custom Trading Bots</h3>
-            <p>Python scripts that monitor live market data and execute trades based on your strategy with zero human error.</p>
+            <h3>Python Scrapers</h3>
+            <p>Pull data from any website into Excel instantly.</p>
+            <span class="slot-tag">● 1 SLOT LEFT</span>
         </div>
-
         <div class="card">
-            <div class="tag">Popular</div>
-            <h3>Lead-Gen Scrapers</h3>
-            <p>Automatically extract thousands of B2B emails and phone numbers from Google Maps and LinkedIn in minutes.</p>
+            <h3>Custom AI Tools</h3>
+            <p>Your own private AI trained on your own documents.</p>
+            <span class="slot-tag">● AVAILABLE</span>
         </div>
+    </section>
 
-        <div class="card">
-            <div class="tag">New</div>
-            <h3>Personal AI Dashboards</h3>
-            <p>A private control center to manage all your bots, see your data, and track your business growth from your phone.</p>
-        </div>
-    </div>
-
-    <section id="contact" class="contact">
-        <div class="form-container">
-            <h2 style="font-size: 3rem; text-align: center; margin-bottom: 40px;">CONNECT.</h2>
-            <form action="https://formspree.io/f/YOUR_ID" method="POST">
-                <input type="text" name="name" placeholder="Full Name" required>
-                <input type="email" name="email" placeholder="Business Email" required>
-                <textarea name="message" placeholder="What should your bot build?" rows="4"></textarea>
-                <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">SEND REQUEST</button>
-            </form>
-        </div>
+    <section id="contact" style="padding: 100px 0; border-top: 1px solid #111;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">SECURE A SLOT</h2>
+        <form action="https://formspree.io/f/YOUR_ID" method="POST" style="max-width: 600px; margin: 0 auto;">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="message" placeholder="Describe your bot..." rows="4"></textarea>
+            <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">SEND REQUEST</button>
+        </form>
     </section>
 </div>
+
+<script>
+    // Live Terminal Script to attract people
+    const lines = [
+        "> Bot_Engine: ONLINE",
+        "> Scanning Instagram for leads...",
+        "> Success: Found 14 targets.",
+        "> Starting automated outreach...",
+        "> Logic check: COMPLETE",
+        "> System idling... waiting for orders."
+    ];
+    let i = 0;
+    const term = document.getElementById('terminal-text');
+    
+    function typeTerminal() {
+        if (i < lines.length) {
+            term.innerHTML += lines[i] + "<br>";
+            i++;
+            setTimeout(typeTerminal, 1500);
+        }
+    }
+    // Start typing after 1 second
+    setTimeout(typeTerminal, 1000);
+</script>
 
 </body>
 </html>
