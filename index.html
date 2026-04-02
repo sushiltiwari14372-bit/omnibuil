@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBUILD | SUCCESS SYSTEM</title>
+    <title>OMNIBUILD | ACTIVE SYSTEM</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,23 +15,21 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background: var(--bg); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-
         /* HERO SECTION */
         #hero {
             height: 100vh; display: flex; flex-direction: column; 
             justify-content: center; align-items: center; text-align: center;
             transition: 0.8s ease;
         }
-        .hero-h1 { font-size: 5rem; font-weight: 800; margin-bottom: 20px; }
-        .hero-h1 span { color: var(--blue); }
+        .hero-h1 { font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; margin-bottom: 20px; letter-spacing: -2px; }
+        .hero-h1 span { color: var(--blue); text-shadow: 0 0 20px rgba(0, 242, 255, 0.4); }
 
         .start-btn {
             background: transparent; color: var(--blue); border: 2px solid var(--blue);
             padding: 18px 50px; border-radius: 50px; font-size: 1.2rem; font-weight: 800;
             cursor: pointer; transition: 0.4s;
         }
-        .start-btn:hover { background: var(--blue); color: #000; box-shadow: 0 0 30px var(--blue); }
+        .start-btn:hover { background: var(--blue); color: #000; box-shadow: 0 0 30px var(--blue); transform: scale(1.05); }
 
         /* SLIDE UP SECTION */
         #next-step {
@@ -44,79 +42,90 @@
         #next-step.active { transform: translateY(0); }
 
         /* FORM STYLING */
-        #contact-form { width: 100%; max-width: 500px; transition: 0.5s; }
+        #form-container { width: 100%; max-width: 450px; transition: 0.5s; text-align: center; }
         input, textarea { 
             width: 100%; padding: 18px; background: #0a0a0a; border: 1px solid #222; 
             color: white; border-radius: 12px; margin-bottom: 12px; font-family: inherit;
         }
+        input:focus, textarea:focus { border-color: var(--blue); outline: none; }
         .submit-btn { 
             width: 100%; background: var(--blue); color: #000; padding: 18px; 
             border-radius: 12px; border: none; font-weight: 800; cursor: pointer; font-size: 1rem;
         }
 
-        /* THANK YOU MESSAGE (Hidden by default) */
+        /* SUCCESS MESSAGE (Hidden) */
         #thanks-msg { 
-            display: none; text-align: center; animation: fadeIn 0.5s ease forwards;
+            display: none; text-align: center; animation: fadeIn 0.6s ease forwards;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        .thanks-h2 { color: var(--blue); font-size: 2.5rem; margin-bottom: 10px; }
-        .thanks-p { color: #888; font-size: 1.1rem; }
+        .thanks-h2 { color: var(--blue); font-size: 3rem; margin-bottom: 15px; }
+        .thanks-p { color: #888; font-size: 1.2rem; line-height: 1.6; }
 
-        .close-btn { margin-top: 30px; color: #444; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
-
+        .back-link { margin-top: 30px; color: #444; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
     <section id="hero">
         <h1 class="hero-h1">OMNI<span>BUILD</span></h1>
-        <p style="color: #555; margin-bottom: 30px;">High-End AI & Web Solutions.</p>
-        <button class="start-btn" onclick="showNext()">LET'S START</button>
+        <p style="color: #666; margin-bottom: 40px; font-size: 1.1rem; font-family: 'JetBrains Mono';">SYSTEM READY // VERSION 4.0</p>
+        <button class="start-btn" onclick="openSystem()">LET'S START</button>
     </section>
 
     <section id="next-step">
         
-        <div id="contact-form">
-            <h2 style="font-size: 2rem; margin-bottom: 25px; text-align: center;">Ready to grow?</h2>
-            <form action="https://formspree.io/f/YOUR_ID" method="POST" id="my-form">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Business Email" required>
-                <textarea name="message" placeholder="How can we help your business?" rows="4" required></textarea>
-                <button type="submit" class="submit-btn">SEND REQUEST</button>
+        <div id="form-container">
+            <h2 style="font-size: 2.2rem; margin-bottom: 30px;">How can we help?</h2>
+            <form action="https://formspree.io/f/xgoplkee" method="POST" id="omni-form">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="message" placeholder="Describe your project or ask for a price..." rows="4" required></textarea>
+                <button type="submit" class="submit-btn">SEND SIGNAL</button>
             </form>
-            <div class="close-btn" style="text-align: center;" onclick="hideNext()">← BACK</div>
+            <div class="back-link" onclick="closeSystem()">← CANCEL</div>
         </div>
 
         <div id="thanks-msg">
             <h2 class="thanks-h2">Thanks!</h2>
-            <p class="thanks-p">We received your signal.<br>We will reply to you in <b>24 hours</b>.</p>
-            <button class="start-btn" style="margin-top: 30px; font-size: 0.9rem;" onclick="hideNext()">CLOSE</button>
+            <p class="thanks-p">Your message has been encrypted and sent.<br>Check your email. We reply in <b>24 hours</b>.</p>
+            <button class="start-btn" style="margin-top: 40px; font-size: 0.9rem;" onclick="closeSystem()">SYSTEM EXIT</button>
         </div>
 
     </section>
 
     <script>
-        function showNext() {
+        function openSystem() {
             document.getElementById('next-step').classList.add('active');
         }
 
-        function hideNext() {
+        function closeSystem() {
             document.getElementById('next-step').classList.remove('active');
-            // Reset form for next time
+            // Wait for slide down to finish before resetting
             setTimeout(() => {
-                document.getElementById('contact-form').style.display = 'block';
+                document.getElementById('form-container').style.display = 'block';
                 document.getElementById('thanks-msg').style.display = 'none';
+                document.getElementById('omni-form').reset();
             }, 700);
         }
 
-        // Form Submission Logic
-        const form = document.getElementById("my-form");
-        form.onsubmit = function(e) {
-            // This part sends the data and shows the thanks message
-            document.getElementById('contact-form').style.display = 'none';
+        // Handle the "Thanks" message without refreshing the page
+        const form = document.getElementById("omni-form");
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const data = new FormData(event.target);
+            
+            // Show thanks message immediately for better user experience
+            document.getElementById('form-container').style.display = 'none';
             document.getElementById('thanks-msg').style.display = 'block';
-        };
+
+            // Send actual data to Formspree
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+        });
     </script>
 
 </body>
