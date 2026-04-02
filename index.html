@@ -3,139 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBUILD | LIVE AI SYSTEMS</title>
+    <title>OMNIBUILD | AI SYSTEMS</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #000000;
             --neon-blue: #00f2ff;
-            --neon-purple: #7000ff;
             --glass: rgba(255, 255, 255, 0.03);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background: var(--bg); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        body { background: var(--bg); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; padding-top: 80px; }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        /* Hero Section */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
-        .hero h1 { 
-            font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; line-height: 0.9; margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, var(--neon-blue));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        /* --- THE LOGO & NAV BAR --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px;
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; align-items: center; z-index: 1000;
         }
-
-        /* LIVE TERMINAL (This attracts people) */
-        .terminal-window {
-            width: 100%; max-width: 600px; background: #080808; border: 1px solid #222;
-            border-radius: 12px; padding: 20px; font-family: 'JetBrains Mono', monospace;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); margin-top: 20px;
-        }
-        .terminal-header { display: flex; gap: 8px; margin-bottom: 15px; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+        .nav-content { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
         
-        .terminal-body { color: #888; font-size: 0.9rem; min-height: 100px; }
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: var(--neon-blue); }
+        .status-dot { width: 8px; height: 8px; background: #27c93f; border-radius: 50%; box-shadow: 0 0 10px #27c93f; }
+
+        /* Hero Section */
+        .hero { height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero h1 { font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 800; line-height: 0.9; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* The Terminal Window */
+        .terminal-window { width: 100%; max-width: 600px; background: #080808; border: 1px solid #222; border-radius: 12px; padding: 20px; font-family: 'JetBrains Mono', monospace; margin-top: 20px; }
+        .terminal-header { display: flex; gap: 8px; margin-bottom: 15px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; } .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+        .terminal-body { color: #888; font-size: 0.9rem; min-height: 120px; }
         .cursor { display: inline-block; width: 8px; height: 15px; background: var(--neon-blue); animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Product Grid */
+        /* Grid */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 100px 0; }
-        .card { 
-            background: var(--glass); padding: 40px; border-radius: 25px; 
-            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
-        }
-        .card:hover { border-color: var(--neon-blue); background: rgba(0, 242, 255, 0.05); transform: scale(1.02); }
+        .card { background: var(--glass); padding: 40px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .card:hover { border-color: var(--neon-blue); transform: translateY(-5px); }
         .card h3 { color: var(--neon-blue); margin-bottom: 10px; }
-
-        /* Progress Bar (Shows how busy you are) */
         .slot-tag { color: #27c93f; font-weight: bold; font-size: 0.8rem; margin-top: 15px; display: block; }
 
-        .btn { 
-            background: var(--neon-blue); color: #000; padding: 18px 45px; border-radius: 8px; 
-            font-weight: 800; text-decoration: none; display: inline-block; margin-top: 30px;
-        }
-        .btn:hover { background: #fff; box-shadow: 0 0 30px var(--neon-blue); }
+        .btn { background: var(--neon-blue); color: #000; padding: 18px 45px; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block; margin-top: 30px; border: none; cursor: pointer; }
+        input, textarea { width: 100%; padding: 20px; background: #0a0a0a; border: 1px solid #222; color: white; border-radius: 10px; margin-bottom: 15px; font-family: inherit; }
 
-        input, textarea { width: 100%; padding: 20px; background: #0a0a0a; border: 1px solid #222; color: white; border-radius: 10px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <section class="hero">
-        <p style="color: var(--neon-blue); font-family: 'JetBrains Mono'; margin-bottom: 10px;">[ SERVER_STATUS: ONLINE ]</p>
-        <h1>AUTOMATE<br>EVERYTHING.</h1>
-        <p style="color: #666; font-size: 1.2rem; max-width: 500px;">We build AI Bots that work 24/7 so you don't have to. Real systems for real business.</p>
-        
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
-            </div>
-            <div class="terminal-body" id="terminal-text">
-                > Initializing Bot_Engine...<br>
-                > Scanning for leads...<br>
-                > Found 12 high-value targets.<br>
-                > <span class="cursor"></span>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">OMNI<span>BUILD</span></div>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.8rem; font-family: 'JetBrains Mono'; color: #888;">
+                <div class="status-dot"></div> SYSTEM ONLINE
             </div>
         </div>
+    </nav>
 
-        <a href="#contact" class="btn">REQUEST A BUILD</a>
-    </section>
+    <div class="container">
+        <section class="hero">
+            <h1>AUTOMATE<br>EVERYTHING.</h1>
+            <p style="color: #666; font-size: 1.2rem; max-width: 500px;">Bespoke AI Bots and Python automation built by Vibhor Tiwari.</p>
+            
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                </div>
+                <div class="terminal-body" id="terminal-text">
+                    > Initializing OmniBuild_OS...<br>
+                    > Status: Ready for orders.<br>
+                    > <span class="cursor"></span>
+                </div>
+            </div>
 
-    <section class="grid">
-        <div class="card">
-            <h3>Instagram Auto-Growth</h3>
-            <p>Bots that find your audience and grow your page 24/7.</p>
-            <span class="slot-tag">● 2 SLOTS LEFT</span>
-        </div>
-        <div class="card">
-            <h3>Python Scrapers</h3>
-            <p>Pull data from any website into Excel instantly.</p>
-            <span class="slot-tag">● 1 SLOT LEFT</span>
-        </div>
-        <div class="card">
-            <h3>Custom AI Tools</h3>
-            <p>Your own private AI trained on your own documents.</p>
-            <span class="slot-tag">● AVAILABLE</span>
-        </div>
-    </section>
+            <a href="#contact" class="btn">REQUEST A BUILD</a>
+        </section>
 
-    <section id="contact" style="padding: 100px 0; border-top: 1px solid #111;">
-        <h2 style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">SECURE A SLOT</h2>
-        <form action="https://formspree.io/f/YOUR_ID" method="POST" style="max-width: 600px; margin: 0 auto;">
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <textarea name="message" placeholder="Describe your bot..." rows="4"></textarea>
-            <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">SEND REQUEST</button>
-        </form>
-    </section>
-</div>
+        <section class="grid">
+            <div class="card">
+                <h3>Instagram Growth</h3>
+                <p>Custom bots to grow your account and reach 10k+ followers.</p>
+                <span class="slot-tag">● 2 SLOTS LEFT</span>
+            </div>
+            <div class="card">
+                <h3>Data Scrapers</h3>
+                <p>Pull 1000s of leads from Google Maps or LinkedIn into Excel.</p>
+                <span class="slot-tag">● 1 SLOT LEFT</span>
+            </div>
+            <div class="card">
+                <h3>Trading Bots</h3>
+                <p>Python scripts to automate your crypto or stock strategy.</p>
+                <span class="slot-tag">● AVAILABLE</span>
+            </div>
+        </section>
 
-<script>
-    // Live Terminal Script to attract people
-    const lines = [
-        "> Bot_Engine: ONLINE",
-        "> Scanning Instagram for leads...",
-        "> Success: Found 14 targets.",
-        "> Starting automated outreach...",
-        "> Logic check: COMPLETE",
-        "> System idling... waiting for orders."
-    ];
-    let i = 0;
-    const term = document.getElementById('terminal-text');
-    
-    function typeTerminal() {
-        if (i < lines.length) {
-            term.innerHTML += lines[i] + "<br>";
-            i++;
-            setTimeout(typeTerminal, 1500);
+        <section id="contact" style="padding: 100px 0; border-top: 1px solid #111;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">START YOUR BUILD</h2>
+            <form action="https://formspree.io/f/YOUR_ID" method="POST" style="max-width: 600px; margin: 0 auto;">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="What kind of bot do you need?" rows="4"></textarea>
+                <button type="submit" class="btn" style="width: 100%;">SEND SIGNAL</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        const term = document.getElementById('terminal-text');
+        const lines = [
+            "> Loading Python modules...",
+            "> Connection established.",
+            "> Scraper: Standby",
+            "> AI_Agent: Online",
+            "> Ready for new project."
+        ];
+        let i = 0;
+        function type() {
+            if (i < lines.length) {
+                term.innerHTML += lines[i] + "<br>";
+                i++;
+                setTimeout(type, 1500);
+            }
         }
-    }
-    // Start typing after 1 second
-    setTimeout(typeTerminal, 1000);
-</script>
+        setTimeout(type, 1000);
+    </script>
 
 </body>
 </html>
