@@ -3,108 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBUILD | AI & BOTS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>OMNIBUILD | AI WEALTH SYSTEMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050505;
-            --blue: #007bff;
-            --gray: #888;
-            --glass: rgba(20, 20, 20, 0.7);
+            --bg: #000000;
+            --money-green: #00ff88;
+            --cyan: #00f2ff;
+            --purple: #7000ff;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        /* Animated Background Particles */
+        .bg-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #111, #000);
+            z-index: -2;
+        }
+        .moving-light {
+            position: fixed; width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.1) 0%, transparent 70%);
+            z-index: -1; animation: float 15s infinite alternate;
+        }
+        @keyframes float { from { transform: translate(-10%, -10%); } to { transform: translate(60%, 40%); } }
 
-        /* Header */
-        nav { padding: 30px 0; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: bold; font-size: 1.5rem; color: var(--blue); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         /* Hero Section */
-        .hero { padding: 100px 0; text-align: left; }
-        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
-        .hero span { color: var(--blue); }
-        .hero p { color: var(--gray); font-size: 1.2rem; margin-bottom: 40px; }
-
-        /* Cards for BOTS and AI */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { 
-            background: var(--glass); 
-            padding: 30px; 
-            border: 1px solid #222; 
-            border-radius: 15px; 
-            transition: 0.3s;
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero h1 { 
+            font-size: clamp(3rem, 10vw, 6rem); font-weight: 800; line-height: 0.9; margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--money-green), var(--cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .card:hover { border-color: var(--blue); transform: translateY(-5px); }
-        .card h3 { color: var(--blue); margin-bottom: 10px; }
+        .revenue-tag { font-family: 'JetBrains Mono'; color: var(--money-green); border: 1px solid var(--money-green); padding: 5px 15px; border-radius: 50px; font-size: 0.9rem; margin-bottom: 20px; }
+
+        /* "What We Build & Sell" Section */
+        .section-title { text-align: center; margin: 80px 0 40px; font-size: 2.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
         
-        /* Small Code Box inside Card */
-        .code { 
-            font-family: 'JetBrains Mono', monospace; 
-            background: #000; 
-            padding: 10px; 
-            border-radius: 5px; 
-            font-size: 0.8rem; 
-            color: #00ff41; 
-            margin-top: 15px;
+        .product-card { 
+            background: var(--glass); padding: 40px; border-radius: 30px; 
+            border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; overflow: hidden;
         }
+        .product-card:hover { 
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--money-green);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1);
+        }
+        .price-tag { color: var(--money-green); font-weight: bold; font-family: 'JetBrains Mono'; font-size: 1.2rem; display: block; margin-top: 15px; }
 
-        /* Form */
-        .contact { padding: 80px 0; }
-        input, textarea { 
-            width: 100%; padding: 15px; margin-bottom: 20px; 
-            background: #111; border: 1px solid #333; color: white; border-radius: 8px; 
+        /* Live Code Terminal */
+        .terminal { 
+            background: #080808; border: 1px solid #222; border-radius: 15px; padding: 20px; 
+            font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #aaa; margin-top: 20px;
         }
-        .btn { 
-            background: var(--blue); color: white; padding: 15px 40px; 
-            border-radius: 8px; font-weight: bold; text-decoration: none; 
-            display: inline-block; border: none; cursor: pointer;
+        .green { color: var(--money-green); }
+
+        /* CTA Button */
+        .btn-glow { 
+            background: var(--money-green); color: #000; padding: 20px 60px; border-radius: 50px; 
+            font-weight: 800; text-decoration: none; display: inline-block; transition: 0.3s;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.4); margin-top: 40px;
         }
+        .btn-glow:hover { transform: scale(1.1); box-shadow: 0 0 50px var(--money-green); }
+
+        /* Contact Form */
+        .contact { padding: 100px 0; background: #050505; border-radius: 50px 50px 0 0; border-top: 1px solid #222; margin-top: 100px; }
+        input, textarea { width: 100%; padding: 20px; background: #000; border: 1px solid #222; color: white; border-radius: 15px; margin-bottom: 20px; }
+        input:focus { border-color: var(--money-green); outline: none; }
 
     </style>
 </head>
 <body>
 
+<div class="bg-glow"></div>
+<div class="moving-light"></div>
+
 <div class="container">
-    <nav>
-        <div class="logo">OMNIBUILD</div>
-        <a href="#contact" class="btn">Hire Me</a>
-    </nav>
-
     <section class="hero">
-        <h1>We Build <span>AI Bots</span><br>For Your Business.</h1>
-        <p>From Python scripts to smart AI Chatbots. We automate your work.</p>
-        <a href="#contact" class="btn">Get Started →</a>
+        <div class="revenue-tag">STATUS: GENERATING_PROFIT</div>
+        <h1>STOP WORKING.<br>START BOTTING.</h1>
+        <p style="color: #888; max-width: 600px; font-size: 1.2rem;">We build custom AI software that makes money while you sleep. High-speed bots for high-speed people.</p>
+        <a href="#contact" class="btn-glow">HIRE THE ARCHITECT</a>
     </section>
 
-    <section class="grid">
-        <div class="card">
-            <h3>AI Chatbots</h3>
-            <p>Smart bots that talk to your customers 24/7 like a human.</p>
-            <div class="code">bot.reply("Hello!")</div>
+    <h2 class="section-title">WHAT WE BUILD (TO SELL)</h2>
+
+    <div class="grid">
+        <div class="product-card">
+            <h3>AI Lead-Gen Bots</h3>
+            <p>Bots that find thousands of emails and phone numbers from Google & Instagram automatically.</p>
+            <div class="terminal">
+                >> scanning_google_maps...<br>
+                >> found: <span class="green">452 leads</span> in 30s<br>
+                >> sending_emails... <span class="green">[OK]</span>
+            </div>
+            <span class="price-tag">Value: ₹25,000+</span>
         </div>
-        <div class="card">
-            <h3>Trading Bots</h3>
-            <p>Automated scripts that check prices and buy/sell for you.</p>
-            <div class="code">if price < low: buy()</div>
+
+        <div class="product-card">
+            <h3>Auto-Trading Bots</h3>
+            <p>Python bots that check prices and buy/sell Crypto or Stocks based on your logic.</p>
+            <div class="terminal">
+                >> checking_market_data...<br>
+                >> signal: <span class="green">BUY_STREAK</span><br>
+                >> executing_trade... <span class="green">DONE</span>
+            </div>
+            <span class="price-tag">Value: ₹50,000+</span>
         </div>
-        <div class="card">
-            <h3>Web Apps</h3>
-            <p>Fast websites and dashboards for your projects.</p>
-            <div class="code">npm run build</div>
+
+        <div class="product-card">
+            <h3>Social Media Bots</h3>
+            <p>Auto-post, auto-reply, and auto-grow your followers on Instagram or Twitter 24/7.</p>
+            <div class="terminal">
+                >> upload_scheduled: 12:00PM<br>
+                >> generated_caption: "AI is the future"<br>
+                >> status: <span class="green">ONLINE</span>
+            </div>
+            <span class="price-tag">Value: ₹15,000+</span>
         </div>
-    </section>
+
+        <div class="product-card">
+            <h3>Custom AI Tools</h3>
+            <p>Private AI tools (like ChatGPT) trained only on YOUR business data.</p>
+            <div class="terminal">
+                >> loading_private_data...<br>
+                >> training_neural_net...<br>
+                >> system: <span class="green">INTELLIGENT</span>
+            </div>
+            <span class="price-tag">Value: ₹80,000+</span>
+        </div>
+    </div>
 
     <section id="contact" class="contact">
-        <h2 style="margin-bottom: 30px;">Start Project</h2>
-        <form action="https://formspree.io/f/YOUR_ID" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="What kind of bot do you need?" rows="5"></textarea>
-            <button type="submit" class="btn">Send Signal</button>
-        </form>
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">MAKE YOUR MOVE.</h2>
+            <p style="color:#666; margin-bottom: 40px;">Describe the bot you want. Let's make it happen.</p>
+            <form action="https://formspree.io/f/YOUR_ID" method="POST">
+                <input type="text" name="name" placeholder="YOUR NAME" required>
+                <input type="email" name="email" placeholder="YOUR EMAIL" required>
+                <textarea name="message" placeholder="WHAT SHOULD YOUR BOT DO?" rows="4"></textarea>
+                <button type="submit" class="btn-glow" style="width:100%; border:none; cursor:pointer;">START BUILD</button>
+            </form>
+        </div>
     </section>
 </div>
 
